@@ -1,13 +1,239 @@
 <!DOCTYPE html>
-<html lang="es">  
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Pruebas</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            background-color: #357abd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav button {
+            background-color: #ffffff;
+            color: #357abd;
+            border: 1px solid #357abd;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav button:hover {
+            background-color: #357abd;
+            color: white;
+        }
+
+        #search-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        #book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-card h3 {
+            margin-top: 0;
+            color: #4a90e2;
+        }
+
+        .book-card p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .book-card .genre {
+            font-style: italic;
+            color: #666;
+        }
+
+        .book-card button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .book-card button:hover {
+            background-color: #357abd;
+        }
+
+        footer {
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Colores bonitos: Azul principal (#4a90e2), secundario (#357abd), fondo claro (#f4f7fa) */
+    </style>
 </head>
 <body>
-    <h1>Bienvenidos a las Pruebas</h1>
-    <h2>Hola Mundo</h2>
-    <p>Git y Github para principiantes</p>
-</body>  
-</html>  
+    <header>
+        <h1>Bienvenidos a la Biblioteca Virtual</h1>
+        <p>Explora nuestra colección de libros y encuentra tu próxima lectura favorita</p>
+    </header>
+
+    <nav>
+        <button onclick="filterBooks('all')">Todos</button>
+        <button onclick="filterBooks('Novela')">Novela</button>
+        <button onclick="filterBooks('Ciencia Ficción')">Ciencia Ficción</button>
+        <button onclick="filterBooks('Fantasía')">Fantasía</button>
+        <button onclick="filterBooks('Historia')">Historia</button>
+        <button onclick="filterBooks('Poesía')">Poesía</button>
+        <button onclick="filterBooks('Biografía')">Biografía</button>
+        <button onclick="filterBooks('Misterio')">Misterio</button>
+        <button onclick="filterBooks('Romance')">Romance</button>
+        <button onclick="filterBooks('Aventura')">Aventura</button>
+        <button onclick="filterBooks('Terror')">Terror</button>
+        <!-- Agrega más botones para géneros nuevos si es necesario -->
+    </nav>
+
+    <section id="search-container">
+        <input type="text" id="search-bar" placeholder="Busca por título, autor o género..." oninput="searchBooks()">
+    </section>
+
+    <section id="book-list">
+        <!-- Aquí irían las tarjetas de libros generadas dinámicamente, pero como es HTML estático, agrego ejemplos basados en tu DB -->
+        <!-- En un setup real, usarías PHP/JS para cargar desde DB, pero aquí simulo con JS al final -->
+
+        <!-- Ejemplo de tarjeta -->
+        <div class="book-card" data-genre="Novela">
+            <h3>Cien años de soledad</h3>
+            <p>Autor: Gabriel Garcia Marquez</p>
+            <p>Año: 1967</p>
+            <p class="genre">Género: Novela</p>
+            <button>Ver Detalles</button>
+        </div>
+
+        <!-- Agrega más manualmente o usa JS para poblar -->
+        <!-- Para completo, el JS al final poblará con datos de ejemplo basados en tu SQL -->
+    </section>
+
+    <script>
+        // Datos de ejemplo basados en tu DB (puedes expandir con todos los inserts)
+        const books = [
+            { title: 'Cien años de soledad', author: 'Gabriel Garcia Marquez', year: 1967, genre: 'Novela' },
+            { title: 'El amor en los tiempos del colera', author: 'Gabriel Garcia Marquez', year: 1985, genre: 'Novela' },
+            { title: 'Harry Potter y la Piedra Filosofal', author: 'J.K. Rowling', year: 1997, genre: 'Fantasía' },
+            { title: 'Fundación', author: 'Isaac Asimov', year: 1951, genre: 'Ciencia Ficción' },
+            { title: 'Orgullo y Prejuicio', author: 'Jane Austen', year: 1813, genre: 'Romance' },
+            { title: 'It', author: 'Stephen King', year: 1986, genre: 'Terror' },
+            { title: 'Asesinato en el Orient Express', author: 'Agatha Christie', year: 1934, genre: 'Misterio' },
+            { title: 'El Hobbit', author: 'J.R.R. Tolkien', year: 1937, genre: 'Fantasía' },
+            { title: '1984', author: 'George Orwell', year: 1949, genre: 'Ciencia Ficción' },
+            { title: 'El Viejo y el Mar', author: 'Ernest Hemingway', year: 1952, genre: 'Drama' },
+            // Agrega más de tus inserts para hacerlo completo...
+            { title: 'El Gran Gatsby', author: 'F. Scott Fitzgerald', year: 1925, genre: 'Drama' },
+            { title: 'Guerra y Paz', author: 'Leo Tolstoy', year: 1869, genre: 'Historia' },
+            { title: 'Frankenstein', author: 'Mary Shelley', year: 1818, genre: 'Ciencia Ficción' },
+            { title: 'La Guerra de los Mundos', author: 'H.G. Wells', year: 1898, genre: 'Ciencia Ficción' },
+            { title: 'Romeo y Julieta', author: 'William Shakespeare', year: 1597, genre: 'Romance' },
+            // ... y así sucesivamente con todos los libros que agregaste
+        ];
+
+        // Función para renderizar libros
+        function renderBooks(filteredBooks) {
+            const bookList = document.getElementById('book-list');
+            bookList.innerHTML = '';
+            filteredBooks.forEach(book => {
+                const card = document.createElement('div');
+                card.classList.add('book-card');
+                card.dataset.genre = book.genre;
+                card.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p>Autor: ${book.author}</p>
+                    <p>Año: ${book.year}</p>
+                    <p class="genre">Género: ${book.genre}</p>
+                    <button>Ver Detalles</button>
+                `;
+                bookList.appendChild(card);
+            });
+        }
+
+        // Filtrar por categoría (género)
+        function filterBooks(genre) {
+            let filtered = books;
+            if (genre !== 'all') {
+                filtered = books.filter(book => book.genre === genre);
+            }
+            renderBooks(filtered);
+        }
+
+        // Búsqueda por texto
+        function searchBooks() {
+            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            const filtered = books.filter(book => 
+                book.title.toLowerCase().includes(searchTerm) ||
+                book.author.toLowerCase().includes(searchTerm) ||
+                book.genre.toLowerCase().includes(searchTerm)
+            );
+            renderBooks(filtered);
+        }
+
+        // Inicializar con todos los libros
+        renderBooks(books);
+    </script>
+</body>
+</html>
