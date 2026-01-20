@@ -1,239 +1,310 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Virtuales</title>
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparativa de Países Líderes en Tecnología e IA - 2026</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-dark: #1e3a8a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --dark: #0f172a;
+      --border: #e2e8f0;
+    }
 
-        header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px 15px;
+    }
 
-        nav {
-            background-color: #357abd;
-            padding: 10px;
-            text-align: center;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-        nav button {
-            background-color: #ffffff;
-            color: #357abd;
-            border: 1px solid #357abd;
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    h1 {
+      color: var(--primary-dark);
+      text-align: center;
+      margin: 1.5rem 0 2.5rem;
+      font-size: 2.1rem;
+    }
 
-        nav button:hover {
-            background-color: #357abd;
-            color: white;
-        }
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      background: white;
+      margin-bottom: 3rem;
+    }
 
-        #search-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.98rem;
+    }
 
-        #search-bar {
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
+    th, td {
+      padding: 16px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
 
-        #book-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-        .book-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
+    tr:hover {
+      background-color: rgba(30, 64, 175, 0.04);
+    }
 
-        .book-card:hover {
-            transform: translateY(-5px);
-        }
+    .country-cell {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
 
-        .book-card h3 {
-            margin-top: 0;
-            color: #4a90e2;
-        }
+    .flag-cell {
+      width: 140px;
+      text-align: center;
+      padding: 12px;
+    }
 
-        .book-card p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
+    .flag {
+      max-width: 110px;
+      max-height: 60px;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
 
-        .book-card .genre {
-            font-style: italic;
-            color: #666;
-        }
+    .history {
+      font-size: 0.92rem;
+      color: #334155;
+      max-width: 380px;
+    }
 
-        .book-card button {
-            background-color: #4a90e2;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 100%;
-        }
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
 
-        .book-card button:hover {
-            background-color: #357abd;
-        }
+    .tech-tag {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
 
-        footer {
-            background-color: #4a90e2;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Colores bonitos: Azul principal (#4a90e2), secundario (#357abd), fondo claro (#f4f7fa) */
-    </style>
+    @media (max-width: 768px) {
+      th, td {
+        padding: 12px 10px;
+        font-size: 0.92rem;
+      }
+      
+      .flag {
+        max-width: 90px;
+        max-height: 50px;
+      }
+      
+      .flag-cell {
+        width: 110px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Bienvenidos a la Biblioteca Virtual</h1>
-        <p>Explora nuestra colección de libros y encuentra tu próxima lectura favorita</p>
-    </header>
 
-    <nav>
-        <button onclick="filterBooks('all')">Todos</button>
-        <button onclick="filterBooks('Novela')">Novela</button>
-        <button onclick="filterBooks('Ciencia Ficción')">Ciencia Ficción</button>
-        <button onclick="filterBooks('Fantasía')">Fantasía</button>
-        <button onclick="filterBooks('Historia')">Historia</button>
-        <button onclick="filterBooks('Poesía')">Poesía</button>
-        <button onclick="filterBooks('Biografía')">Biografía</button>
-        <button onclick="filterBooks('Misterio')">Misterio</button>
-        <button onclick="filterBooks('Romance')">Romance</button>
-        <button onclick="filterBooks('Aventura')">Aventura</button>
-        <button onclick="filterBooks('Terror')">Terror</button>
-        <!-- Agrega más botones para géneros nuevos si es necesario -->
-    </nav>
+<div class="container">
+  <h1>Comparativa de Países Líderes en Tecnología e Inteligencia Artificial - 2026</h1>
 
-    <section id="search-container">
-        <input type="text" id="search-bar" placeholder="Busca por título, autor o género..." oninput="searchBooks()">
-    </section>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>País</th>
+          <th>Bandera / Emblema</th>
+          <th>Antecedentes / Posición actual</th>
+          <th>Fortalezas Tecnológicas Principales (2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="country-cell">Estados Unidos</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="EE.UU." class="flag">
+          </td>
+          <td class="history">
+            Líder indiscutible global en IA desde hace décadas. Alberga las principales empresas, inversión privada récord (>100 mil millones USD anuales) y la mayor parte de la investigación de frontera. Mantiene ventaja en innovación y talento.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Modelos frontier (GPT, Claude, Grok)</span>
+              <span class="tech-tag">Inversión privada masiva</span>
+              <span class="tech-tag">Talento top mundial</span>
+              <span class="tech-tag">Compute & chips (NVIDIA)</span>
+              <span class="tech-tag">Ecosistema startups</span>
+            </div>
+          </td>
+        </tr>
 
-    <section id="book-list">
-        <!-- Aquí irían las tarjetas de libros generadas dinámicamente, pero como es HTML estático, agrego ejemplos basados en tu DB -->
-        <!-- En un setup real, usarías PHP/JS para cargar desde DB, pero aquí simulo con JS al final -->
+        <tr>
+          <td class="country-cell">China</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" alt="China" class="flag">
+          </td>
+          <td class="history">
+            Segundo lugar mundial, con enfoque estatal masivo. Lidera en patentes, publicaciones de IA y despliegue a escala (ciudades inteligentes, vigilancia). Modelos open-source muy competitivos y bajo costo.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Modelos eficientes (DeepSeek, Qwen)</span>
+              <span class="tech-tag">Patentes y papers #1</span>
+              <span class="tech-tag">Infraestructura compute masiva</span>
+              <span class="tech-tag">Aplicaciones a escala nacional</span>
+              <span class="tech-tag">Robótica y vehículos autónomos</span>
+            </div>
+          </td>
+        </tr>
 
-        <!-- Ejemplo de tarjeta -->
-        <div class="book-card" data-genre="Novela">
-            <h3>Cien años de soledad</h3>
-            <p>Autor: Gabriel Garcia Marquez</p>
-            <p>Año: 1967</p>
-            <p class="genre">Género: Novela</p>
-            <button>Ver Detalles</button>
-        </div>
+        <tr>
+          <td class="country-cell">Singapur</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Singapore.svg" alt="Singapur" class="flag">
+          </td>
+          <td class="history">
+            Líder en adopción masiva de IA (top 2-3 mundial). Gobierno pro-innovación, infraestructura digital avanzada y atracción de talento global. Alta tasa de uso diario de IA entre la población.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Adopción masiva (>60% población)</span>
+              <span class="tech-tag">Gobierno digital 100%</span>
+              <span class="tech-tag">Fintech & logística IA</span>
+              <span class="tech-tag">Hub Asia-Pacífico</span>
+              <span class="tech-tag">Regulación amigable</span>
+            </div>
+          </td>
+        </tr>
 
-        <!-- Agrega más manualmente o usa JS para poblar -->
-        <!-- Para completo, el JS al final poblará con datos de ejemplo basados en tu SQL -->
-    </section>
+        <tr>
+          <td class="country-cell">Emiratos Árabes Unidos</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg" alt="EAU" class="flag">
+          </td>
+          <td class="history">
+            Líder absoluto en adopción de IA por población (top 1 mundial ~64%). Inversión agresiva en compute y datacenters con petrodólares. Atracción de talento y empresas globales.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Adopción #1 mundial</span>
+              <span class="tech-tag">Compute masivo (clusters H100)</span>
+              <span class="tech-tag">Inversión soberana</span>
+              <span class="tech-tag">Hub Medio Oriente</span>
+              <span class="tech-tag">Políticas pro-innovación</span>
+            </div>
+          </td>
+        </tr>
 
-    <script>
-        // Datos de ejemplo basados en tu DB (puedes expandir con todos los inserts)
-        const books = [
-            { title: 'Cien años de soledad', author: 'Gabriel Garcia Marquez', year: 1967, genre: 'Novela' },
-            { title: 'El amor en los tiempos del colera', author: 'Gabriel Garcia Marquez', year: 1985, genre: 'Novela' },
-            { title: 'Harry Potter y la Piedra Filosofal', author: 'J.K. Rowling', year: 1997, genre: 'Fantasía' },
-            { title: 'Fundación', author: 'Isaac Asimov', year: 1951, genre: 'Ciencia Ficción' },
-            { title: 'Orgullo y Prejuicio', author: 'Jane Austen', year: 1813, genre: 'Romance' },
-            { title: 'It', author: 'Stephen King', year: 1986, genre: 'Terror' },
-            { title: 'Asesinato en el Orient Express', author: 'Agatha Christie', year: 1934, genre: 'Misterio' },
-            { title: 'El Hobbit', author: 'J.R.R. Tolkien', year: 1937, genre: 'Fantasía' },
-            { title: '1984', author: 'George Orwell', year: 1949, genre: 'Ciencia Ficción' },
-            { title: 'El Viejo y el Mar', author: 'Ernest Hemingway', year: 1952, genre: 'Drama' },
-            // Agrega más de tus inserts para hacerlo completo...
-            { title: 'El Gran Gatsby', author: 'F. Scott Fitzgerald', year: 1925, genre: 'Drama' },
-            { title: 'Guerra y Paz', author: 'Leo Tolstoy', year: 1869, genre: 'Historia' },
-            { title: 'Frankenstein', author: 'Mary Shelley', year: 1818, genre: 'Ciencia Ficción' },
-            { title: 'La Guerra de los Mundos', author: 'H.G. Wells', year: 1898, genre: 'Ciencia Ficción' },
-            { title: 'Romeo y Julieta', author: 'William Shakespeare', year: 1597, genre: 'Romance' },
-            // ... y así sucesivamente con todos los libros que agregaste
-        ];
+        <tr>
+          <td class="country-cell">Corea del Sur</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" alt="Corea del Sur" class="flag">
+          </td>
+          <td class="history">
+            Crecimiento explosivo en adopción y hardware. Líder en semiconductores (Samsung, SK Hynix) y aplicaciones cotidianas. Gobierno impulsa IA en educación y empresa.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Semiconductores IA</span>
+              <span class="tech-tag">Adopción rápida (+18% anual)</span>
+              <span class="tech-tag">5G/6G + IA</span>
+              <span class="tech-tag">Robótica industrial</span>
+              <span class="tech-tag">Modelos en coreano</span>
+            </div>
+          </td>
+        </tr>
 
-        // Función para renderizar libros
-        function renderBooks(filteredBooks) {
-            const bookList = document.getElementById('book-list');
-            bookList.innerHTML = '';
-            filteredBooks.forEach(book => {
-                const card = document.createElement('div');
-                card.classList.add('book-card');
-                card.dataset.genre = book.genre;
-                card.innerHTML = `
-                    <h3>${book.title}</h3>
-                    <p>Autor: ${book.author}</p>
-                    <p>Año: ${book.year}</p>
-                    <p class="genre">Género: ${book.genre}</p>
-                    <button>Ver Detalles</button>
-                `;
-                bookList.appendChild(card);
-            });
-        }
+        <tr>
+          <td class="country-cell">Reino Unido</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg" alt="Reino Unido" class="flag">
+          </td>
+          <td class="history">
+            Fuerte en investigación ética y seguridad IA. Hogar de DeepMind y Alan Turing Institute. Políticas pioneras en regulación y cumbres globales de IA.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Investigación de vanguardia</span>
+              <span class="tech-tag">IA ética y seguridad</span>
+              <span class="tech-tag">Fintech & healthcare</span>
+              <span class="tech-tag">Talento académico</span>
+              <span class="tech-tag">Regulación influyente</span>
+            </div>
+          </td>
+        </tr>
 
-        // Filtrar por categoría (género)
-        function filterBooks(genre) {
-            let filtered = books;
-            if (genre !== 'all') {
-                filtered = books.filter(book => book.genre === genre);
-            }
-            renderBooks(filtered);
-        }
+        <tr>
+          <td class="country-cell">Francia</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="Francia" class="flag">
+          </td>
+          <td class="history">
+            Líder europeo en soberanía IA y modelos open (Mistral). Inversión estatal fuerte y enfoque en IA confiable. Alberga cumbres globales y regula con EU AI Act.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Modelos open-weight (Mistral)</span>
+              <span class="tech-tag">IA soberana EU</span>
+              <span class="tech-tag">Regulación ética</span>
+              <span class="tech-tag">Investigación multimodal</span>
+              <span class="tech-tag">Ecosistema París</span>
+            </div>
+          </td>
+        </tr>
 
-        // Búsqueda por texto
-        function searchBooks() {
-            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-            const filtered = books.filter(book => 
-                book.title.toLowerCase().includes(searchTerm) ||
-                book.author.toLowerCase().includes(searchTerm) ||
-                book.genre.toLowerCase().includes(searchTerm)
-            );
-            renderBooks(filtered);
-        }
+        <tr>
+          <td class="country-cell">India</td>
+          <td class="flag-cell">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg" alt="India" class="flag">
+          </td>
+          <td class="history">
+            Mayor pool de talento IA (millones de desarrolladores). Crecimiento explosivo en adopción empresarial y publicaciones. Misión IndiaAI impulsa infraestructura local.
+          </td>
+          <td>
+            <div class="tech-list">
+              <span class="tech-tag">Talento masivo & bajo costo</span>
+              <span class="tech-tag">Adopción empresarial #1</span>
+              <span class="tech-tag">Modelos multilingual</span>
+              <span class="tech-tag">Crecimiento publicaciones</span>
+              <span class="tech-tag">Infraestructura emergente</span>
+            </div>
+          </td>
+        </tr>
 
-        // Inicializar con todos los libros
-        renderBooks(books);
-    </script>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
 </body>
 </html>
