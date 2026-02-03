@@ -1,340 +1,240 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Comparativa de Países Líderes en Tecnología e IA - 2026</title>
-  <style>
-    :root {
-      --primary: #1e40af;
-      --primary-dark: #1e3a8a;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --dark: #0f172a;
-      --border: #e2e8f0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería en Sistemas | Facultad de Innovación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --p: #0f172a;    /* Azul profundo */
+            --s: #0ea5e9;    /* Azul brillante */
+            --a: #f97316;    /* Naranja vibrante */
+            --bg: #f8fafc;   /* Fondo neutro */
+            --glass: rgba(255, 255, 255, 0.9);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-      padding: 20px 15px;
-    }
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(135deg, var(--p), #1e293b);
+            color: white; padding: 1rem 0; position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.25);
+        }
+        .top { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 2rem; font-weight: 900; letter-spacing: -1px; }
+        .logo span { color: var(--a); }
+        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--s); }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        /* --- HERO --- */
+        .hero {
+            height: 80vh; margin-top: 70px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600') center/cover;
+            color: white; text-align: center; padding: 0 20px;
+        }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
+        .hero p { font-size: 1.4rem; max-width: 800px; color: #cbd5e1; }
 
-    h1 {
-      color: var(--primary-dark);
-      text-align: center;
-      margin: 1.5rem 0 2.5rem;
-      font-size: 2.1rem;
-    }
+        /* --- CONTENEDOR GENERAL --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--p); }
+        .underline { width: 60px; height: 5px; background: var(--a); margin: 15px auto; border-radius: 10px; }
 
-    .table-wrapper {
-      overflow-x: auto;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      background: white;
-      margin-bottom: 3rem;
-    }
+        /* --- OBJETIVOS INTERACTIVOS (JUNTADOS) --- */
+        .grid-interactiva { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .obj-card {
+            background: white; border-radius: 24px; padding: 40px;
+            border: 1px solid #e2e8f0; cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        }
+        .obj-card i { font-size: 3rem; color: var(--s); margin-bottom: 20px; transition: 0.3s; }
+        .obj-card h3 { margin-bottom: 15px; color: var(--p); }
+        .extra-info { max-height: 0; opacity: 0; overflow: hidden; transition: 0.5s; border-top: 1px solid #eee; }
+        
+        .obj-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2); border-color: var(--s); }
+        .obj-card:hover i { color: var(--a); transform: rotate(10deg); }
+        .obj-card:hover .extra-info { max-height: 200px; opacity: 1; margin-top: 20px; padding-top: 20px; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.98rem;
-    }
+        /* --- CAMPO LABORAL (NUEVA SECCIÓN LARGA) --- */
+        .work-section { background: #f1f5f9; padding: 80px 0; border-radius: 50px; margin: 40px 0; }
+        .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .work-text h3 { font-size: 2rem; color: var(--p); margin-bottom: 20px; }
+        .work-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .work-item i { color: var(--a); font-size: 1.5rem; }
 
-    th, td {
-      padding: 16px 14px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
+        /* --- MULTIMEDIA (VIDEO) --- */
+        .video-box {
+            background: var(--p); padding: 40px; border-radius: 30px; color: white; margin: 40px 0;
+        }
+        .video-wrapper {
+            position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 30px;
+        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-    th {
-      background-color: var(--primary);
-      color: white;
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+        /* --- FORMULARIO OSCURO --- */
+        #contacto {
+            background: linear-gradient(135deg, var(--p), #1e293b); color: white;
+            padding: 60px; border-radius: 30px; box-shadow: 0 20px 40px rgba(14, 165, 233, 0.3);
+        }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        input, textarea {
+            width: 100%; padding: 18px; margin-bottom: 20px; border: none;
+            border-radius: 15px; background: rgba(255,255,255,0.08); color: white; font-size: 1rem;
+        }
+        input:focus { outline: 2px solid var(--s); background: rgba(255,255,255,0.15); }
+        .btn-send {
+            background: var(--s); color: white; border: none; padding: 20px;
+            width: 100%; border-radius: 15px; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-send:hover { background: var(--a); transform: scale(1.02); }
 
-    tr:hover {
-      background-color: rgba(30, 64, 175, 0.04);
-    }
-
-    .country-cell {
-      font-weight: 600;
-      color: var(--primary-dark);
-    }
-
-    .flag-cell {
-      width: 140px;
-      text-align: center;
-      padding: 12px;
-    }
-
-    .flag {
-      max-width: 110px;
-      max-height: 60px;
-      object-fit: contain;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .history {
-      font-size: 0.92rem;
-      color: #334155;
-      max-width: 380px;
-    }
-
-    .tech-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .tech-tag {
-      background-color: #e0f2fe;
-      color: #0369a1;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: 1px solid #bae6fd;
-      display: inline-block;
-    }
-
-    .tech-tag:hover {
-      background-color: #bae6fd;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(3, 105, 161, 0.15);
-    }
-
-    @media (max-width: 768px) {
-      th, td {
-        padding: 12px 10px;
-        font-size: 0.92rem;
-      }
-      
-      .flag {
-        max-width: 90px;
-        max-height: 50px;
-      }
-      
-      .flag-cell {
-        width: 110px;
-      }
-    }
-  </style>
+        /* --- FOOTER --- */
+        footer { background: #070b14; color: #64748b; padding: 80px 20px 20px; margin-top: 80px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; }
+        .footer-bottom { border-top: 1px solid #1e293b; margin-top: 40px; padding-top: 20px; text-align: center; font-size: 0.8rem; }
+        
+        @media(max-width:768px){ .work-grid, .contact-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+    </style>
 </head>
 <body>
 
+<header>
+    <div class="top">
+        <div class="logo">GRUPO TECNOLOGICO<span>UNIVERSITARIO NAUCALPAN</span></div>
+        <nav>
+            <a href="#objetivos">Objetivos</a>
+            <a href="#campo">Oportunidades</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Tu futuro empieza con un bit.</h1>
+    <p>La carrera de Ingeniería en Sistemas no solo te enseña a programar, te enseña a crear el mundo diferente.</p>
+</section>
+
 <div class="container">
-  <h1>Países con la mejor tecnología </h1>
+    
+    <div id="objetivos" class="section-title">
+        <h2>Objetivos de la Carrera</h2>
+        <div class="underline"></div>
+    </div>
 
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>País</th>
-          <th>Bandera</th>
-          <th>Antecedentes</th>
-          <th>Tecnológicas Principales</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="country-cell">Estados Unidos</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="EE.UU." class="flag">
-          </td>
-          <td class="history">
-            Líder indiscutible global en IA. Alberga las principales empresas, inversión privada récord y la mayor parte de la investigación de frontera.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://screenapp.io/es/blog/grok-vs-chatgpt-vs-gemini" target="_blank" class="tech-tag">Modelos IA (GPT, Claude, Grok)</a>
-              <a href="https://es.weforum.org/" target="_blank" class="tech-tag">Economía</a>
-              <a href="https://www.nvidia.com/en-us/" target="_blank" class="tech-tag">Computadoras y chips (NVIDIA)</a>
+    <div class="grid-interactiva">
+        <div class="obj-card">
+            <i class="fas fa-microchip"></i>
+            <h3>Arquitectura de Sistemas</h3>
+            <p>La Licenciatura en Ingeniería en Sistemas Computacionales 100% te proporcionará los conocimientos necesarios para convertirte en el profesional informático que las empresas demandan, con conocimientos en inteligencia artificial, ingeniería del software, diseño de hardware, arquitecturas de red o seguridad de los datos, entre otros.  RVOE oficial SEP nº 20220070.</p>
+            <div class="extra-info">
+                <p>En 3 años obtendrás todos los conocimientos necesarios para trabajar en una de las licenciaturas con más demanda laboral del país, con una tasa de ocupación del 97%</p>
             </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">China</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" alt="China" class="flag">
-          </td>
-          <td class="history">
-            Segundo lugar mundial con enfoque estatal masivo. Lidera en patentes, publicaciones y despliegue a escala.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://github.com/deepseek-ai" target="_blank" class="tech-tag">Modelos IA (DeepSeek, Qwen)</a>
-              <a href="https://www.milenio.com/opinion/luis-apperti/mundo-industrial/el-espectacular-avance-de-china-en-la-tecnologia" target="_blank" class="tech-tag">Infraestructura computacional masiva</a>
-              <a href="https://www.icex.es/content/dam/icex/centros/china/documentos/2025/estudio-mercado-vehiculo-autonomo-china-2025-resumen.pdf" target="_blank" class="tech-tag">Robótica y vehículos autónomos</a>
+        </div>
+        <div class="obj-card">
+            <i class="fas fa-code-branch"></i>
+            <h3>Desarrollo Academico</h3>
+            <p> Formación básica en Ingeniería en sistemas computacionales, profundizando en: Física, matemáticas, empresa e informática. Conocimientos de informática: Diseño, desarrollo y evaluación de aplicaciones y sistemas, planificando y administrando proyectos. Tecnología de ingeniería de software: Diseño, evaluación, usabilidad y seguridad de plataformas de software y hardware para la ejecución de sistemas. </p>
+            <div class="extra-info">
+                <p>Conocerás desde cómo funciona una computadora, hasta el manejo de diferentes herramientas y técnicas de programación de software. Podrás manejar herramientas como Python, C, Java, SQL server, Linux, Win server, R, JustInMind, entre otras.</p>
             </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">Singapur</td>
-          <td class="flag-cell">
-            <img src="https://wallpapercave.com/wp/wp4214707.jpg" alt="Singapur" class="flag">
-          </td>
-          <td class="history">
-            Líder en adopción masiva de IA. Gobierno pro-innovación e infraestructura digital avanzada.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://apolitical.co/solution-articles/es/nativo-digital-de-singapur" target="_blank" class="tech-tag">Gobierno digital 100%</a>
-              <a href="https://ncsita.cl/singapur-digitaliza-aduanas-benchmark-internacional/" target="_blank" class="tech-tag">Fintech & logística IA</a>
-              <a href="https://www.wipo.int/es/web/economics/w/blogs/singapore" target="_blank" class="tech-tag">Regulación industrial</a>
+        </div>
+        <div class="obj-card">
+            <i class="fas fa-user-shield"></i>
+            <h3>Ventajas</h3>
+            <p>Titulación Oficial en tan solo 3 años. Calidad universitaria, Becas y mensualidades congeladas durante toda tu licenciatura. Clases en vivo, en línea en la que podrás interactuar con tu profesor y compañeros. Tutor personal que te acompañará durante todos tus estudios. Campus Virtual al que podrás acceder las 24h del día.</p>
+            <div class="extra-info">
+                <p>Se situa entre las más de 100 instituciones reconocidas por la acreditadora y siendo la única institución de educación superior en modalidad escolarizada con el más alto reconocimiento a su excelencia académica. .</p>
             </div>
-          </td>
-        </tr>
+        </div>
+    </div>
 
-        <tr>
-          <td class="country-cell">Emiratos Árabes Unidos</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg" alt="EAU" class="flag">
-          </td>
-          <td class="history">
-            Líder en adopción por población. Inversión agresiva en infrestuctura computacional con petrodólares.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://es.gizmodo.com/la-apuesta-millonaria-de-los-emiratos-arabes-unidos-sacude-la-industria-de-chips-que-significa-su-alianza-con-tsmc-y-samsung-para-ee-uu-2000129828" target="_blank" class="tech-tag">Computadoras masivo)</a>
-              <a href="https://es.gizmodo.com/la-apuesta-millonaria-de-los-emiratos-arabes-unidos-sacude-la-industria-de-chips-que-significa-su-alianza-con-tsmc-y-samsung-para-ee-uu-2000129828" target="_blank" class="tech-tag">Inversión soberana</a>
-              <a href="https://www.elcorreo.ae/articulo/economia/microsoft-invertira-mas-7900-millones-dolares-emiratos-arabes-unidos/20251104091913171455.html" target="_blank" class="tech-tag">Políticas pro-innovación</a>
+    <div id="campo" class="work-section">
+        <div class="container">
+            <div class="work-grid">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600" style="width:100%; border-radius:30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="Ingeniería">
+                <div class="work-text">
+                    <h3>¿Dónde podrás trabajar?</h3>
+                    <p style="margin-bottom: 25px;">El 98% de nuestros egresados consigue empleo en los primeros 6 meses en sectores líderes:</p>
+                    <div class="work-item"><i class="fas fa-check-circle"></i> BBVA, SANTANDER, BANAMEX, BANORTE</div>
+                    <div class="work-item"><i class="fas fa-check-circle"></i> DEPENDENCIAS DE GOBIERNO</div>
+                    <div class="work-item"><i class="fas fa-check-circle"></i> AGENCIAS DE SEGURIDAD</div>
+                    <div class="work-item"><i class="fas fa-check-circle"></i> DESARROLLO DE VIDEOJUEGOS</div>
+                </div>
             </div>
-          </td>
-        </tr>
+        </div>
+    </div>
 
-        <tr>
-          <td class="country-cell">Corea del Sur</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" alt="Corea del Sur" class="flag">
-          </td>
-          <td class="history">
-            Crecimiento explosivo en hardware y aplicaciones. Líder en semiconductores.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://www.samsung.com/semiconductor/" target="_blank" class="tech-tag">Semiconductores IA</a>
-              <a href="https://www.xatakamovil.com/conectividad/corea-sur-quiere-adelantarse-a-todos-redes-6g-2028-cuando-muchos-todavia-no-tenemos-5g-real" target="_blank" class="tech-tag">5G/6G + IA</a>
-              <a href="https://xpert.digital/es/robotica-en-corea-del-sur/" target="_blank" class="tech-tag">Robótica industrial</a>
+    <div id="video" class="video-box">
+        <h2 style="color:white; text-align:center;">Nuestra Tecnología</h2>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/26A5YuImU90" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div id="contacto">
+        <div class="contact-grid">
+            <div>
+                <h2 style="color:white;">¡Únete a la nueva generación!</h2>
+                <p style="color: #94a3b8; margin: 20px 0;">Recibe una invitación personalizada para nuestra próxima generación y recorre nuestras instalaciones.</p>
+                <div style="margin-top:30px;">
+                    <p><i class="fas fa-phone-alt" style="color:var(--s);"></i> +52 (55) 2425 1545</p>
+                    <p><i class="fas fa-envelope" style="color:var(--s); margin-top:10px;"></i> grupotecnologico@sistemas.gtun.mx</p>
+                </div>
             </div>
-          </td>
-        </tr>
-
-        <!-- 5 países nuevos: líderes globales en tecnología e IA 2026 -->
-
-        <tr>
-          <td class="country-cell">Japón</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg" alt="Japón" class="flag">
-          </td>
-          <td class="history">
-            Potencia en robótica avanzada, IA industrial y semiconductores. Alto en innovación tecnológica per cápita.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://makeblock.com.ar/la-tecnologia-robotica-del-futuro-japon/" target="_blank" class="tech-tag">Robótica + IA</a>
-              <a href="https://phemex.com/es/news/article/japan-to-quadruple-ai-and-semiconductor-budget-to-123-trillion-by-2026-49108" target="_blank" class="tech-tag">Semiconductores IA</a>
-              <a href="https://es.weforum.org/stories/2025/03/japon-puede-recuperar-su-posicion-como-lider-global-en-tecnologia-asi-es-como/" target="_blank" class="tech-tag">Innovación industrial</a>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">Suecia</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg" alt="Suecia" class="flag">
-          </td>
-          <td class="history">
-            Líder europeo en innovación y madurez soberana de IA. Fuerte en ética, startups y adopción digital.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://paises.org/suecia/tecnologia-innovacion" target="_blank" class="tech-tag">Innovación nórdica</a>
-              <a href="https://elprogresivo.com/2025/08/10/el-debate-sobre-el-uso-de-ia-en-la-politica-sueca/" target="_blank" class="tech-tag">IA ética y soberana</a>
-              <a href="https://digital-strategy.ec.europa.eu/es/factpages/sweden-2024-digital-decade-country-report" target="_blank" class="tech-tag">Adopción digital</a>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">Alemania</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg" alt="Alemania" class="flag">
-          </td>
-          <td class="history">
-            Motor de Industria 4.0 y manufactura inteligente. Líder en IA aplicada a automotriz y robótica.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://www.deutschland.de/es/topic/economia/inteligencia-artificial-industria-40-smart-factory" target="_blank" class="tech-tag">Industria 4.0 IA</a>
-              <a href="https://www.deutschland.de/es/topic/economia/inteligencia-artificial-industria-40-smart-factory" target="_blank" class="tech-tag">Manufactura inteligente</a>
-              <a href="https://www.dw.com/es/titanes-de-la-industria-de-alemania-se-suman-a-la-era-de-la-ia/a-74974632" target="_blank" class="tech-tag">R&D automotriz</a>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">Reino Unido</td>
-          <td class="flag-cell">
-            <img src="https://tse3.mm.bing.net/th/id/OIP.9zAihr2mbg4E6Gg4jtWQ0wHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Reino Unido" class="flag">
-          </td>
-          <td class="history">
-            Hub de investigación en IA (DeepMind). Fuerte en startups, talento y políticas de innovación.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://forbes.com.mx/el-reino-unido-implementara-la-ia-en-sus-servicios-publicos-para-hacerlos-mas-humanos/" target="_blank" class="tech-tag">Investigación IA</a>
-              <a href="https://londonaccount.co.uk/crecimiento-startup-reino-unido/" target="_blank" class="tech-tag">Startups tech</a>
-              <a href="https://www.france24.com/es/programas/econom%C3%ADa/20250114-el-plan-de-reino-unido-para-ser-la-superpotencia-de-la-inteligencia-artificial" target="_blank" class="tech-tag">Políticas IA</a>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="country-cell">Canadá</td>
-          <td class="flag-cell">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" alt="Canadá" class="flag">
-          </td>
-          <td class="history">
-            Pionero global en IA (MILA, Vector). Líder en talento, investigación ética y modelos fundacionales.
-          </td>
-          <td>
-            <div class="tech-list">
-              <a href="https://www.canadiancollege.edu.co/blog/inteligencia-artificial-canada-oportunidadeso" target="_blank" class="tech-tag">Talento IA</a>
-              <a href="https://www.eltiempo.com/mundo/eeuu-y-canada/como-sera-la-frontera-de-canada-estados-unidos-en-50-anos-segun-la-ia-3325028" target="_blank" class="tech-tag">Investigación frontera</a>
-              <a href="https://www.correo.ca/2025/09/el-futuro-de-la-inteligencia-artificial-y-sus-riesgos-eticos-en-canada/" target="_blank" class="tech-tag">IA ética</a>
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
+            <form>
+                <input type="text" placeholder="Nombre completo" required>
+                <input type="email" placeholder="Correo institucional" required>
+                <textarea rows="4" placeholder="¿Cuál es tu lenguaje de programación favorito o qué te gustaría aprender?"></textarea>
+                <button type="submit" class="btn-send">SOLICITAR INGRESO</button>
+            </form>
+        </div>
+    </div>
 
 </div>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3 style="color:white; margin-bottom:20px;">GTU<span>NAUCALPAN</span></h3>
+            <p>Formando los ingenieros del mañana.</p>
+        </div>
+        <div>
+            <h4 style="color:white; margin-bottom:20px;">Síguenos</h4>
+            <div style="display:flex; gap:15px; font-size:1.5rem;">
+                <i class="fab fa-facebook" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#0ea5e9'" onmouseout="this.style.color='#64748b'"></i>
+                <i class="fab fa-instagram" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#f97316'" onmouseout="this.style.color='#64748b'"></i>
+                <i class="fab fa-linkedin" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#0ea5e9'" onmouseout="this.style.color='#64748b'"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 GRUPO TECNOLOGICO UNIVERSITARIO NAUCALPAN   </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.obj-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const info = card.querySelector('.extra-info');
+            if (info.style.maxHeight) {
+                info.style.maxHeight = null;
+                info.style.opacity = 0;
+            } else {
+                info.style.maxHeight = "200px";
+                info.style.opacity = 1;
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
