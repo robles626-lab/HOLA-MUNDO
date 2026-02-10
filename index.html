@@ -3,238 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería en Sistemas | Facultad de Innovación</title>
+    <title>Tecnologías Sociales - Soluciones Comunitarias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --p: #0f172a;    /* Azul profundo */
-            --s: #0ea5e9;    /* Azul brillante */
-            --a: #f97316;    /* Naranja vibrante */
-            --bg: #f8fafc;   /* Fondo neutro */
-            --glass: rgba(255, 255, 255, 0.9);
+            --verde-oscuro: #60c2e6;
+            --verde-principal: #54dbe2;
+            --verde-claro: #4deaed;
+            --verde-suave: #81c784;
+            --verde-muy-claro: #e8f5e9;
+            --verde-extra: #a5d6a7;
+            --bg: #f5f8f5;
+            --texto: #2e3d2e;
+            --blanco: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
-
-        /* --- HEADER --- */
-        header {
-            background: linear-gradient(135deg, var(--p), #1e293b);
-            color: white; padding: 1rem 0; position: fixed;
-            width: 100%; top: 0; z-index: 1000;
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.25);
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--texto);
+            line-height: 1.7;
         }
-        .top { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 2rem; font-weight: 900; letter-spacing: -1px; }
-        .logo span { color: var(--a); }
-        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { color: var(--s); }
 
-        /* --- HERO --- */
+        .header-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 110px;
+            height: 110px;
+            background: var(--blanco);
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(46,125,50,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            border: 4px solid var(--verde-principal);
+        }
+        .header-logo img { width: 65%; height: 85%; object-fit: contain; }
+
+        #dvd-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 500;
+        }
+        #bouncing-title {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--verde-principal);
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(76,175,80,0.5);
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background: var(--verde-oscuro);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 80px;
+        }
+        .sidebar a {
+            padding: 20px 40px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            color: #dcedc8;
+            display: block;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sidebar a:hover {
+            color: white;
+            background: var(--verde-principal);
+            padding-left: 55px;
+        }
+
+        .openbtn {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 1000;
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 18px rgba(46,125,50,0.4);
+        }
+
         .hero {
-            height: 80vh; margin-top: 70px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
-                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600') center/cover;
-            color: white; text-align: center; padding: 0 20px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(48, 192, 240, 0.65), rgba(118, 195, 243, 0.65)),
+                        url('https://th.bing.com/th/id/R.5c32ba78be94379dcb3c6896e8b49d92?rik=SxsW2oNtvzgqSg&pid=ImgRaw&r=0') center/cover;
+            color: white;
+            text-align: center;
+            padding: 0 30px;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.7);
         }
-        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
-        .hero p { font-size: 1.4rem; max-width: 800px; color: #cbd5e1; }
 
-        /* --- CONTENEDOR GENERAL --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--p); }
-        .underline { width: 60px; height: 5px; background: var(--a); margin: 15px auto; border-radius: 10px; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
 
-        /* --- OBJETIVOS INTERACTIVOS (JUNTADOS) --- */
-        .grid-interactiva { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .obj-card {
-            background: white; border-radius: 24px; padding: 40px;
-            border: 1px solid #e2e8f0; cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        .section-content {
+            display: none;
+            animation: fadeIn 0.9s ease;
         }
-        .obj-card i { font-size: 3rem; color: var(--s); margin-bottom: 20px; transition: 0.3s; }
-        .obj-card h3 { margin-bottom: 15px; color: var(--p); }
-        .extra-info { max-height: 0; opacity: 0; overflow: hidden; transition: 0.5s; border-top: 1px solid #eee; }
-        
-        .obj-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2); border-color: var(--s); }
-        .obj-card:hover i { color: var(--a); transform: rotate(10deg); }
-        .obj-card:hover .extra-info { max-height: 200px; opacity: 1; margin-top: 20px; padding-top: 20px; }
+        #section-inicio { display: block; }
 
-        /* --- CAMPO LABORAL (NUEVA SECCIÓN LARGA) --- */
-        .work-section { background: #f1f5f9; padding: 80px 0; border-radius: 50px; margin: 40px 0; }
-        .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .work-text h3 { font-size: 2rem; color: var(--p); margin-bottom: 20px; }
-        .work-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .work-item i { color: var(--a); font-size: 1.5rem; }
+        .big-card {
+            background: white;
+            padding: 55px;
+            border-radius: 30px;
+            box-shadow: 0 15px 45px rgba(46,125,50,0.15);
+            margin-bottom: 80px;
+            border-top: 10px solid var(--verde-principal);
+        }
 
-        /* --- MULTIMEDIA (VIDEO) --- */
-        .video-box {
-            background: var(--p); padding: 40px; border-radius: 30px; color: white; margin: 40px 0;
-        }
-        .video-wrapper {
-            position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 30px;
-        }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        h1 { font-size: 5.8rem; font-weight: 900; color: var(--verde-oscuro); }
+        h2 { font-size: 3.4rem; color: var(--verde-principal); margin-bottom: 35px; }
+        h3 { font-size: 2.3rem; color: var(--verde-claro); margin: 40px 0 20px; }
+        p { font-size: 1.3rem; color: #3e5240; margin-bottom: 28px; }
 
-        /* --- FORMULARIO OSCURO --- */
-        #contacto {
-            background: linear-gradient(135deg, var(--p), #1e293b); color: white;
-            padding: 60px; border-radius: 30px; box-shadow: 0 20px 40px rgba(14, 165, 233, 0.3);
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            margin: 70px 0;
         }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        input, textarea {
-            width: 100%; padding: 18px; margin-bottom: 20px; border: none;
-            border-radius: 15px; background: rgba(255,255,255,0.08); color: white; font-size: 1rem;
-        }
-        input:focus { outline: 2px solid var(--s); background: rgba(255,255,255,0.15); }
-        .btn-send {
-            background: var(--s); color: white; border: none; padding: 20px;
-            width: 100%; border-radius: 15px; font-weight: 900; font-size: 1.2rem;
-            cursor: pointer; transition: 0.3s;
-        }
-        .btn-send:hover { background: var(--a); transform: scale(1.02); }
 
-        /* --- FOOTER --- */
-        footer { background: #070b14; color: #64748b; padding: 80px 20px 20px; margin-top: 80px; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; }
-        .footer-bottom { border-top: 1px solid #1e293b; margin-top: 40px; padding-top: 20px; text-align: center; font-size: 0.8rem; }
-        
-        @media(max-width:768px){ .work-grid, .contact-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+        .service-article {
+            background: var(--verde-muy-claro);
+            padding: 45px;
+            border-radius: 25px;
+            border-top: 8px solid var(--verde-suave);
+            transition: all 0.35s;
+        }
+        .service-article:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 22px 55px rgba(76,175,80,0.28);
+        }
+
+        .full-img {
+            width: 100%;
+            border-radius: 20px;
+            margin: 35px 0 25px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.14);
+        }
+
+        form {
+            background: white;
+            padding: 55px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        label { display: block; margin: 22px 0 10px; font-weight: 600; font-size: 1.15rem; }
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--verde-principal);
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(76,175,80,0.2);
+        }
+        button {
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            margin-top: 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #339dd2;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(46,125,50,0.4);
+        }
+
+        .media-box {
+            background: var(--verde-oscuro);
+            color: white;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 70px 0;
+            text-align: center;
+        }
+        .video-wrapper, .map-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        }
+        .video-wrapper iframe, .map-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background: var(--verde-oscuro);
+            color: #dcedc8;
+            padding: 70px 30px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        footer a { color: var(--verde-suave); text-decoration: none; }
+        footer a:hover { color: white; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="top">
-        <div class="logo">GRUPO TECNOLOGICO<span>UNIVERSITARIO NAUCALPAN</span></div>
-        <nav>
-            <a href="#objetivos">Objetivos</a>
-            <a href="#campo">Oportunidades</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
+<div class="header-logo">
+    <img src="C:\Users\DELL\Desktop\GTU SIMBOLO.png" alt="Logo Tecnologías Sociales">
+</div>
+
+<div id="dvd-container"><div id="bouncing-title">GTUN</div></div>
+
+<button class="openbtn" onclick="toggleNav()">☰ MENÚ</button>
+
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" style="font-size: 45px; text-align: right;" onclick="toggleNav()">×</a>
+    <a onclick="showSection('inicio')">Inicio</a>
+    <a onclick="showSection('servicios')">Tecnologías</a>
+    <a onclick="showSection('noticias')">Noticias</a>
+    <a onclick="showSection('contacto')">Contacto</a>
+</div>
+
+<header class="hero">
+    <div>
+        <h1>Tecnologías Sociales</h1>
+        <p style="font-size: 2.6rem; max-width: 1000px; margin: 35px auto;">
+            Soluciones creadas por y para las comunidades, para un mundo más justo y sostenible
+        </p>
     </div>
 </header>
 
-<section class="hero">
-    <h1>Tu futuro empieza con un bit.</h1>
-    <p>La carrera de Ingeniería en Sistemas no solo te enseña a programar, te enseña a crear el mundo diferente.</p>
-</section>
+<main class="container">
 
-<div class="container">
-    
-    <div id="objetivos" class="section-title">
-        <h2>Objetivos de la Carrera</h2>
-        <div class="underline"></div>
-    </div>
+    <!-- INICIO -->
+    <section id="section-inicio" class="section-content">
+        <div class="big-card">
+            <h2>¿Qué son las Tecnologías Sociales?</h2>
+            <p>Las tecnologías sociales son soluciones prácticas, accesibles y participativas que surgen de las propias comunidades para resolver problemas sociales, ambientales y económicos. No dependen de grandes inversiones ni tecnología de punta, sino del conocimiento colectivo, la colaboración y la adaptación al contexto local.</p>
+            <p>Su fuerza radica en que empoderan a las personas, fortalecen la cohesión social y generan impactos duraderos con recursos limitados, siendo una herramienta clave para la inclusión y la sostenibilidad en todo el mundo.</p>
 
-    <div class="grid-interactiva">
-        <div class="obj-card">
-            <i class="fas fa-microchip"></i>
-            <h3>Arquitectura de Sistemas</h3>
-            <p>La Licenciatura en Ingeniería en Sistemas Computacionales 100% te proporcionará los conocimientos necesarios para convertirte en el profesional informático que las empresas demandan, con conocimientos en inteligencia artificial, ingeniería del software, diseño de hardware, arquitecturas de red o seguridad de los datos, entre otros.  RVOE oficial SEP nº 20220070.</p>
-            <div class="extra-info">
-                <p>En 3 años obtendrás todos los conocimientos necesarios para trabajar en una de las licenciaturas con más demanda laboral del país, con una tasa de ocupación del 97%</p>
-            </div>
-        </div>
-        <div class="obj-card">
-            <i class="fas fa-code-branch"></i>
-            <h3>Desarrollo Academico</h3>
-            <p> Formación básica en Ingeniería en sistemas computacionales, profundizando en: Física, matemáticas, empresa e informática. Conocimientos de informática: Diseño, desarrollo y evaluación de aplicaciones y sistemas, planificando y administrando proyectos. Tecnología de ingeniería de software: Diseño, evaluación, usabilidad y seguridad de plataformas de software y hardware para la ejecución de sistemas. </p>
-            <div class="extra-info">
-                <p>Conocerás desde cómo funciona una computadora, hasta el manejo de diferentes herramientas y técnicas de programación de software. Podrás manejar herramientas como Python, C, Java, SQL server, Linux, Win server, R, JustInMind, entre otras.</p>
-            </div>
-        </div>
-        <div class="obj-card">
-            <i class="fas fa-user-shield"></i>
-            <h3>Ventajas</h3>
-            <p>Titulación Oficial en tan solo 3 años. Calidad universitaria, Becas y mensualidades congeladas durante toda tu licenciatura. Clases en vivo, en línea en la que podrás interactuar con tu profesor y compañeros. Tutor personal que te acompañará durante todos tus estudios. Campus Virtual al que podrás acceder las 24h del día.</p>
-            <div class="extra-info">
-                <p>Se situa entre las más de 100 instituciones reconocidas por la acreditadora y siendo la única institución de educación superior en modalidad escolarizada con el más alto reconocimiento a su excelencia académica. .</p>
-            </div>
-        </div>
-    </div>
+            <img src="URL_IMAGEN_INICIO_1_AQUI" alt="Comunidad trabajando" class="full-img">
 
-    <div id="campo" class="work-section">
-        <div class="container">
-            <div class="work-grid">
-                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600" style="width:100%; border-radius:30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="Ingeniería">
-                <div class="work-text">
-                    <h3>¿Dónde podrás trabajar?</h3>
-                    <p style="margin-bottom: 25px;">El 98% de nuestros egresados consigue empleo en los primeros 6 meses en sectores líderes:</p>
-                    <div class="work-item"><i class="fas fa-check-circle"></i> BBVA, SANTANDER, BANAMEX, BANORTE</div>
-                    <div class="work-item"><i class="fas fa-check-circle"></i> DEPENDENCIAS DE GOBIERNO</div>
-                    <div class="work-item"><i class="fas fa-check-circle"></i> AGENCIAS DE SEGURIDAD</div>
-                    <div class="work-item"><i class="fas fa-check-circle"></i> DESARROLLO DE VIDEOJUEGOS</div>
+            <div class="media-box">
+                <h3>Video introductorio</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/watch?time_continue=1&v=6R9kxdaWtAI&embeds_referring_euri=https%3A%2F%2Fwww.bing.com%2F&embeds_referring_origin=https%3A%2F%2Fwww.bing.com&source_ve_path=MjM4NTE" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <img src="URL_IMAGEN_INICIO_2_AQUI" alt="Imagen secundaria" class="full-img">
+        </div>
+    </section>
+
+    <!-- TECNOLOGÍAS / SERVICIOS -->
+    <section id="section-servicios" class="section-content">
+        <div class="big-card">
+            <h2>Principales Tecnologías Sociales</h2>
+
+            <div class="services-grid">
+
+                <article class="service-article">
+                    <h3>Reforestación y restauración comunitaria</h3>
+                    <p>Consiste en la organización colectiva para plantar especies nativas, recuperar suelos degradados y proteger ecosistemas. Las comunidades deciden qué especies usar, dónde plantar y cómo dar mantenimiento, integrando conocimiento tradicional con técnicas modernas de bajo costo.</p>
+                    <p>Esta tecnología mejora la captura de carbono, protege contra inundaciones y erosión, genera empleo temporal y fortalece la identidad cultural al trabajar con plantas de valor alimenticio, medicinal o artesanal.</p>
+                    <img src="URL_IMAGEN_TEC_1_AQUI" alt="Reforestación comunitaria" class="full-img">
+                </article>
+
+                <article class="service-article">
+                    <h3>Educación ambiental participativa</h3>
+                    <p>Se basa en talleres, círculos de aprendizaje y materiales creados por y para la comunidad, donde niños, jóvenes y adultos aprenden sobre reciclaje, cuidado del agua, biodiversidad y consumo responsable mediante dinámicas prácticas y lúdicas.</p>
+                    <p>Genera conciencia colectiva, cambia hábitos a largo plazo, reduce residuos y prepara a las nuevas generaciones para enfrentar los retos ambientales desde la acción local y cotidiana.</p>
+                    <img src="URL_IMAGEN_TEC_2_AQUI" alt="Educación ambiental" class="full-img">
+                </article>
+
+                <article class="service-article">
+                    <h3>Huertos urbanos y familiares</h3>
+                    <p>Implementación de huertos en espacios reducidos (azoteas, patios, escuelas, baldíos) usando técnicas agroecológicas, compostaje y semillas locales para producir alimentos sanos y accesibles sin depender de agroquímicos.</p>
+                    <p>Mejora la seguridad alimentaria, reduce gastos en comida, fomenta la nutrición, sirve como herramienta educativa y crea espacios de convivencia y economía solidaria en barrios y comunidades.</p>
+                    <img src="URL_IMAGEN_TEC_3_AQUI" alt="Huerto urbano" class="full-img">
+                </article>
+
+                <article class="service-article">
+                    <h3>Bancos de semillas comunitarios</h3>
+                    <p>Las comunidades recolectan, guardan, intercambian y distribuyen semillas nativas y criollas, preservando la diversidad genética y reduciendo la dependencia de semillas comerciales transgénicas o híbridas.</p>
+                    <p>Fortalece la soberanía alimentaria, protege el conocimiento agrícola tradicional y asegura la disponibilidad de cultivos adaptados al cambio climático y al territorio local.</p>
+                    <img src="URL_IMAGEN_TEC_4_AQUI" alt="Banco de semillas" class="full-img">
+                </article>
+
+            </div>
+
+            <div class="media-box">
+                <h3>Conoce más sobre tecnologías sociales</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/URL_O_ID_VIDEO_TECNOLOGIAS_AQUI" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="video" class="video-box">
-        <h2 style="color:white; text-align:center;">Nuestra Tecnología</h2>
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/26A5YuImU90" frameborder="0" allowfullscreen></iframe>
+    <!-- NOTICIAS -->
+    <section id="section-noticias" class="section-content">
+        <div class="big-card">
+            <h2>Noticias y Avances</h2>
+
+            <p style="text-align: center; font-style: italic; margin: 40px 0; color: var(--verde-claro);">
+                (Aquí puedes agregar noticias o dejar espacios para imágenes y videos de avances reales)
+            </p>
+
+            <img src="URL_IMAGEN_NOTICIAS_EXTRA_AQUI" alt="Avance o noticia" class="full-img">
         </div>
-    </div>
+    </section>
 
-    <div id="contacto">
-        <div class="contact-grid">
-            <div>
-                <h2 style="color:white;">¡Únete a la nueva generación!</h2>
-                <p style="color: #94a3b8; margin: 20px 0;">Recibe una invitación personalizada para nuestra próxima generación y recorre nuestras instalaciones.</p>
-                <div style="margin-top:30px;">
-                    <p><i class="fas fa-phone-alt" style="color:var(--s);"></i> +52 (55) 2425 1545</p>
-                    <p><i class="fas fa-envelope" style="color:var(--s); margin-top:10px;"></i> grupotecnologico@sistemas.gtun.mx</p>
-                </div>
-            </div>
+    <!-- CONTACTO -->
+    <section id="section-contacto" class="section-content">
+        <div class="big-card">
+            <h2>Contacto</h2>
+            <p>¿Quieres sumarte, compartir una iniciativa o pedir apoyo?</p>
+
             <form>
-                <input type="text" placeholder="Nombre completo" required>
-                <input type="email" placeholder="Correo institucional" required>
-                <textarea rows="4" placeholder="¿Cuál es tu lenguaje de programación favorito o qué te gustaría aprender?"></textarea>
-                <button type="submit" class="btn-send">SOLICITAR INGRESO</button>
-            </form>
-        </div>
-    </div>
+                <label for="nombre">Nombre *</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
 
-</div>
+                <label for="email">Correo electrónico *</label>
+                <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="edad" min="18" max="65" placeholder="18-65 años">
+
+                <label for="fecha">Fecha de contacto preferida</label>
+                <input type="date" id="fecha" name="fecha">
+
+                <label for="interes">Área de interés</label>
+                <select id="interes" name="interes">
+                    <option value="">Selecciona una opción</option>
+                    <option value="reforestacion">Reforestación comunitaria</option>
+                    <option value="educacion">Educación ambiental</option>
+                    <option value="huertos">Huertos urbanos y familiares</option>
+                    <option value="semillas">Bancos de semillas</option>
+                    <option value="otro">Otra tecnología social</option>
+                </select>
+
+                <label for="mensaje">Mensaje *</label>
+                <textarea id="mensaje" name="mensaje" rows="8" required placeholder="Cuéntanos tu idea, consulta o cómo deseas participar..."></textarea>
+
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+
+            <div class="media-box">
+                <h3>Dónde estamos</h3>
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.477!2d-99.133208!3d19.432608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0026db097507%3A0x54061076265ee841!2sCiudad%20de%20M%C3%A9xico!5e0!3m2!1ses!2smx!4v1730000000000!5m2!1ses!2smx" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+                <h3>Sonidos de la naturaleza</h3>
+                <audio controls style="width:100%; margin: 40px 0;">
+                    <source src="URL_DE_AUDIO_NATURALEZA_AQUI.mp3" type="audio/mpeg">
+                </audio>
+
+                <img src="URL_IMAGEN_CONTACTO_AQUI" alt="Equipo o comunidad" class="full-img">
+            </div>
+        </div>
+    </section>
+
+</main>
 
 <footer>
-    <div class="footer-content">
-        <div>
-            <h3 style="color:white; margin-bottom:20px;">GTU<span>NAUCALPAN</span></h3>
-            <p>Formando los ingenieros del mañana.</p>
-        </div>
-        <div>
-            <h4 style="color:white; margin-bottom:20px;">Síguenos</h4>
-            <div style="display:flex; gap:15px; font-size:1.5rem;">
-                <i class="fab fa-facebook" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#0ea5e9'" onmouseout="this.style.color='#64748b'"></i>
-                <i class="fab fa-instagram" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#f97316'" onmouseout="this.style.color='#64748b'"></i>
-                <i class="fab fa-linkedin" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.color='#0ea5e9'" onmouseout="this.style.color='#64748b'"></i>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2026 GRUPO TECNOLOGICO UNIVERSITARIO NAUCALPAN   </div>
+    <p>© 2026 Tecnologías Sociales - Construyendo soluciones desde las comunidades</p>
+    <address>
+        Contacto: <a href="mailto:contacto@tecnologiasociales.org">contacto@tecnologiasociales.org</a><br>
+        Teléfono: +52 (55) 1234-5678<br>
+        Ciudad de México, México
+    </address>
 </footer>
 
 <script>
-    document.querySelectorAll('.obj-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const info = card.querySelector('.extra-info');
-            if (info.style.maxHeight) {
-                info.style.maxHeight = null;
-                info.style.opacity = 0;
-            } else {
-                info.style.maxHeight = "200px";
-                info.style.opacity = 1;
-            }
-        });
-    });
-</script>
+    const box = document.getElementById('bouncing-title');
+    let px = 0, py = 0, vx = 3.5, vy = 3.5;
+    function move() {
+        let cw = window.innerWidth, ch = window.innerHeight;
+        let bw = box.offsetWidth, bh = box.offsetHeight;
+        px += vx; py += vy;
+        if (px + bw >= cw || px <= 0) vx *= -1;
+        if (py + bh >= ch || py <= 0) vy *= -1;
+        box.style.left = px + 'px';
+        box.style.top = py + 'px';
+        requestAnimationFrame(move);
+    }
+    move();
 
+    function toggleNav() {
+        const side = document.getElementById("mySidebar");
+        side.style.width = (side.style.width === "360px") ? "0" : "360px";
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.section-content').forEach(s => s.style.display = 'none');
+        document.getElementById('section-' + id).style.display = 'block';
+        toggleNav();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
